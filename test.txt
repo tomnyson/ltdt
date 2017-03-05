@@ -1,1 +1,67 @@
-just test
+DFS và ứng dụng
+Tìm kiếm ưu tiên chiều sâu hay tìm kiếm theo chiều sâu ( Depth-first search - DFS) là một thuật toán duyệt hoặc tìm kiếm trên một cây hoặc một đồ thị. Thuật toán khởi đầu tại gốc (hoặc chọn một đỉnh nào đó coi như gốc) và phát triển xa nhất có thể theo mỗi nhánh.
+
+Thông thường, DFS là một dạng tìm kiếm thông tin không đầy đủ mà quá trình tìm kiếm được phát triển tới đỉnh con đầu tiên của nút đang tìm kiếm cho tới khi gặp được đỉnh cần tìm hoặc tới một nút không có con. Khi đó giải thuật quay lui về đỉnh vừa mới tìm kiếm ở bước trước. Trong dạng không đệ quy, tất cả các đỉnh chờ được phát triển được bổ sung vào một ngăn xếp LIFO.
+
+Độ phức tạp không gian của DFS thấp hơn của BFS (tìm kiếm ưu tiên chiều rộng). Độ phức tạp thời gian của hai thuật toán là tương đương nhau và bằng O(|V| + |E|).
+
+Lý Thuyết:
+
+Trong phần này mình sẽ hướng dẫn các bạn viết thuật toán DFS từ ma trận kề sử dụng phương pháp đệ quy.
+
+Lưu ý có 2 cách để duyệt DFS đó là sử dụng đệ quy và sử dụng stack. nhưng phương pháp sử dụng stack có nhiều thao tác push, pop. sợ những bạn mới làm quen với thuật toán thấy khó và rắc rối. nên mình chỉ sử dụng cách đơn giản nhất đó là dùng đệ quy cho các bạn hiểu.
+
+Ví dụ:
+
+Ta có 1 ma trận kề như sau
+
+ 0	1 
+1 
+0 
+0 
+0 
+ 1	0 
+1 
+1 
+0 
+0 
+ 1	1 
+0 
+0 
+1 
+0 
+ 0	1	0	0	1	1 
+ 0	0	1	1	0	1
+ 0	0
+0 
+1 
+1 
+0 
+
+Thuật toán biểu diễn duyệt các đỉnh theo chiều sâu sẽ được biểu diễn như sau
+void DFS(int u){
+     cout<<u;
+     cx[u]=0;
+     for(int i=1;i<=n;i++)
+     if(a[u][i]&&cx[i])
+     DFS(i);
+     }
+Kết quả in ra sẽ là;
+1 2 3 5 4 6
+Ứng dụng của DFS:
+1. Tìm số thành phần liên thông.
+ Ý tưởng:  Ta sẽ dùng DFS duyệt toàn bộ đồ thị từ 1 đỉnh u cho trước. sử dụng một biến đếm để đếm số thành phần liên thông của đồ thị.
+Cứ mỗi lần hàm DFS phải duyệt lại thì biến đếm tăng lên 1 đơn vị. giá trị của biến đếm sau khi thuật toán chạy xong chính là số thành phần liên thông của đồ thị trên
+ Hàm cần thêm vào là:
+void lienthong(){
+     int dem=0, k;
+     while(test()){
+             for(int i=1;i<=n;i++)
+             if(cx[i]){ k=i;
+             break;
+             }
+             DFS(k); dem++;
+       cout<<endl;
+       }
+     cout<<dem;
+}
