@@ -1,1 +1,12 @@
-mình làm chuyên v? PHP code BE mà th?y code PHP dau d?u quá, gi? mu?n chuy?n qua code FE cho nh?, mình ch? bi?t, html, css, scss, bootstrap, js/jquery(co b?n), có ki?m du?c vi?c v?i m?c luong 6tr ko các bác, hay th?p hon
+ou can use git rebase, for example, if you want to modify back to commit bbc643cd, run
+
+$ git rebase --interactive 'bbc643cd^'
+In the default editor, modify pick to edit in the line whose commit you want to modify. Make your changes and then commit them with the same message you had before:
+
+$ git commit --all --amend --no-edit
+to modify the commit, and after that
+
+$ git rebase --continue
+to return back to the previous head commit.
+
+WARNING: Note that this will change the SHA-1 of that commit as well as all children -- in other words, this rewrites the history from that point forward. You can break repos doing this if you push using the command git push --force
